@@ -1,0 +1,48 @@
+
+<div class="card">
+  <div class="card-header">
+    <div class="row row-0">
+
+      <div class="col-auto">
+        <a href="#table03" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample"><span class="material-icons">minimize</span></a>
+      </div>
+    </div>
+  </div>
+  <div class="collapse show" id="table03">
+    <div class="card-body">
+      <div class="table-responsive">
+        <div class="table-search">
+        </div>
+        <table id="all-high-school-students" class="table table-bordered">
+          <thead>
+          <tr>
+            <td>Email </td>
+            <td> Do Chat </td>
+
+
+
+          </tr>
+          </thead>
+          <tbody>
+
+            <% @users.each do |user| %>
+              <tr>
+
+
+                <td><%= user.email  %></td>
+                <td><%= link_to "Chat", home_index_path(id: current_user.id,friend_id: user.id), :class => 'navbar-link' %></td>
+
+              </tr>
+            <% end %>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+

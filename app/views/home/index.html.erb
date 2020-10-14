@@ -1,0 +1,34 @@
+<div id="main">
+  <h2>Chat room</h2>
+
+
+      <input type="hidden" id="current_user" value=<%= params[:id] %>>
+  <input type="hidden" id="friend" value=<%= params[:friend_id] %>>
+  <div>
+    <div id="messages">
+
+      <% @Chats.each do |chat| %>
+
+
+        <p class="received"><%=chat.message %></p>
+        <p class="sent"> sent by <%=chat.name %></p>
+
+
+      <% end %>
+
+      <% @Chats2.each do |chat| %>
+
+
+        <p class="received"><%=chat.message %></p>
+        <p class="sent"> sent by <%=chat.name %></p>
+
+
+
+      <% end %>
+    </div>
+    <form id="send_message">
+      <input type="text" id="message" name="message">
+      <button>Send</button>
+    </form>
+  </div>
+</div>

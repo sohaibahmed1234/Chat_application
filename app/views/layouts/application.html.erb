@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ChatRoom</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+
+  </head>
+
+  <body>
+  <!-- Grey with black text -->
+
+
+  <!-- Black with white text -->
+
+
+  <!-- Blue with white text -->
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark">...</nav>
+  <p class="navbar navbar-expand-sm bg-light navbar-light">
+    <% if user_signed_in? %>
+      Logged in as  <strong><%= current_user.email %></strong>.
+
+      <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
+      <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
+    <% else %>
+      <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
+      <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
+    <% end %>
+  </p>
+  <p><%= link_to "Chat with all user", chat_index_path, :class => 'navbar-link'  %>
+  </p>
+
+  <p class = "notice" ><%= notice %> </p>
+  <p class = "alert" ><%= alert %></p>
+
+    <%= yield %>
+
+  </body>
+</html>
