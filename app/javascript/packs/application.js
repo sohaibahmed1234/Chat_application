@@ -20,15 +20,50 @@ require("jquery")
 import ChatRoomChannel from "../channels/chat_room_channel";
 
 $(document).on('turbolinks:load', function () {
-    $("form").on('submit', function(e){
+    $("#send_message").on('submit', function(e){
         e.preventDefault();
         let message = $('#message').val();
          let current_usr=$('#current_user').val();
         let friend_id=$('#friend').val();
+        let file=$('#myfile').get(0).files.length
+        let user_status1=$('#user_status').val();
+        //console.log(current_usr);
+       // console.log(user_status1);
+
+        // if $new_message_attachment.get(0).files.length > 0
+
+        if (file>0) {
+            var reader = new FileReader()
+            let file_name = $('#myfile').get(0).files[0].name
+
+
+            // reader.readAsDataURL, $('#myfile').get(0).files[0]
+            reader.onload = function (e) {
+                var dataURL = reader.result;
+                ChatRoomChannel.speak(message, current_usr, friend_id, dataURL,file_name,user_status1);
+                $('#myfile').val('')
+               // console.log(dataURL);
+            }
+
+            //  reader.readAsDataURL(file);
+            reader.readAsDataURL($('#myfile').get(0).files[0])
+        }else{
+            if (message.length > 0) {
+                ChatRoomChannel.speak(message, current_usr, friend_id, null, null, user_status1);
+                $('#message').val('')
+            }
+        }
+
+       // ChatRoomChannel.speak(message,current_usr,friend_id,reader.result);
+       // console.log(reader.readAsDataURL, $('#myfile').get(0).files[0]);
         if (message.length > 0) {
             console.log(message)
-            ChatRoomChannel.speak(message,current_usr,friend_id);
-            $('#message').val('')
+
+           // ChatRoomChannel.speak(message,current_usr,friend_id,reader.result);
+
+
         }
     });
 })
+
+
