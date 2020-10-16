@@ -44,7 +44,7 @@ $(document).on('turbolinks:load', function () {
                 $('#myfile').val('')
                // console.log(dataURL);
             }
-
+            $('#message').val('')
             //  reader.readAsDataURL(file);
             reader.readAsDataURL($('#myfile').get(0).files[0])
         }else{
@@ -64,6 +64,10 @@ $(document).on('turbolinks:load', function () {
 
         }
     });
+
+
+    $('#messages').stop().animate({ scrollTop: $('#messages')[0].scrollHeight}, 1000);
+
 })
 
 
