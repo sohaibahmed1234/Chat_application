@@ -19,20 +19,41 @@ const ChatRoomChannel = consumer.subscriptions.create("ChatRoomChannel", {
               // var extension = filename.split('.').pop();
               var re = /(\.jpg|\.jpeg|\.bmp|\.gif|\.png)$/i;
               if (re.exec(data.filename)) {
-                  $('#messages').append('<p class="sent"> ' + data.message + '</p>')
-                  // $('#messages').append('<p class="sent"> ' + "sent by " + data.sent + '</p>')
+                  if (data.message=="")
+                  {
+                      $('#messages').append('<img class="send" src="' + data.attachment + '"width="200" height="121"onclick="window.open('+data.file_url+', \'_blank\');">')
+                      $('#messages').stop().animate({ scrollTop: $('#messages')[0].scrollHeight}, 1000);
 
+                  }
+                  else {
+                      $('#messages').append('<p class="sent"> ' + data.message + '</p>')
+                      // $('#messages').append('<p class="sent"> ' + "sent by " + data.sent + '</p>')
+                      $('#messages').append('<img class="send" src="' + data.attachment + '"width="200" height="121"onclick="window.open(' + data.file_url + ', \'_blank\');">')
+                      $('#messages').stop().animate({ scrollTop: $('#messages')[0].scrollHeight}, 1000);
 
-                  $('#messages').append('<img class="sent" src="' + data.attachment + '"width="200" height="121">')
+                  }
               } else {
-                  $('#messages').append('<p class="sent"> ' + data.message + '</p>')
-                  // $('#messages').append('<p class="sent"> ' + "sent by " + data.sent + '</p>')
-                  // console.log(data.file_url);
-                  $('#messages').append('<a href=' + data.file_url + '>' + data.filename + '</a>')
+                  if (data.message=="")
+                  {
+                      $('#messages').append('<a class ="senda" href=' + data.file_url + '>' + data.filename + '</a>')
+                      $('#messages').stop().animate({ scrollTop: $('#messages')[0].scrollHeight}, 1000);
+
+                  }else {
+
+
+                      $('#messages').append('<p class="sent"> ' + data.message + '</p>')
+                      // $('#messages').append('<p class="sent"> ' + "sent by " + data.sent + '</p>')
+                      // console.log(data.file_url);
+                      $('#messages').append('<a class ="senda" href=' + data.file_url + '>' + data.filename + '</a>')
+                      $('#messages').stop().animate({ scrollTop: $('#messages')[0].scrollHeight}, 1000);
+
+                  }
               }
 
           } else {
               $('#messages').append('<p class="sent"> ' + data.message + '</p>')
+              $('#messages').stop().animate({ scrollTop: $('#messages')[0].scrollHeight}, 1000);
+
               //  $('#messages').append('<p class="sent"> ' + "sent by " + data.sent + '</p>')
           }
       }else{
@@ -40,21 +61,47 @@ const ChatRoomChannel = consumer.subscriptions.create("ChatRoomChannel", {
               // var extension = filename.split('.').pop();
               var re = /(\.jpg|\.jpeg|\.bmp|\.gif|\.png)$/i;
               if (re.exec(data.filename)) {
-                  $('#messages').append('<p class="received"> ' + data.message + '</p>')
-                  // $('#messages').append('<p class="sent"> ' + "sent by " + data.sent + '</p>')
+                  if (data.message=="")
+                  {
+                      $('#messages').append('<img class="receive" src="' + data.attachment + '"width="200" height="121"onclick="window.open('+data.file_url+', \'_blank\');">')
+                      $('#messages').stop().animate({ scrollTop: $('#messages')[0].scrollHeight}, 1000);
+
+                  }else {
 
 
-                  $('#messages').append('<img class="received" src="' + data.attachment + '"width="200" height="121">')
+                      $('#messages').append('<p class="received"> ' + data.message + '</p>')
+                      // $('#messages').append('<p class="sent"> ' + "sent by " + data.sent + '</p>')
+
+
+                      $('#messages').append('<img class="receive" src="' + data.attachment + '"width="200" height="121"onclick="window.open(' + data.file_url + ', \'_blank\');">')
+                      $('#messages').stop().animate({ scrollTop: $('#messages')[0].scrollHeight}, 1000);
+
+
+                  }
               } else {
-                  $('#messages').append('<p class="received"> ' + data.message + '</p>')
-                  // $('#messages').append('<p class="sent"> ' + "sent by " + data.sent + '</p>')
-                  // console.log(data.file_url);
-                  $('#messages').append('<a href=' + data.file_url + '>' + data.filename + '</a>')
+                  if (data.message=="")
+                  {
+                      $('#messages').append('<a class ="receivea" href=' + data.file_url + '>' + data.filename + '</a>')
+                      $('#messages').stop().animate({ scrollTop: $('#messages')[0].scrollHeight}, 1000);
+
+                  }else {
+
+
+                      $('#messages').append('<p class="received"> ' + data.message + '</p>')
+                      // $('#messages').append('<p class="sent"> ' + "sent by " + data.sent + '</p>')
+                      // console.log(data.file_url);
+                      $('#messages').append('<a class ="receivea" href=' + data.file_url + '>' + data.filename + '</a>')
+                      $('#messages').stop().animate({ scrollTop: $('#messages')[0].scrollHeight}, 1000);
+
+
+                  }
               }
 
           } else {
               $('#messages').append('<p class="received"> ' + data.message + '</p>')
               //  $('#messages').append('<p class="sent"> ' + "sent by " + data.sent + '</p>')
+              $('#messages').stop().animate({ scrollTop: $('#messages')[0].scrollHeight}, 1000);
+
           }
       }
   },

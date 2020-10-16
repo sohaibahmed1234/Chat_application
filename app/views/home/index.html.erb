@@ -2,115 +2,145 @@
   <h2>Chat room</h2>
 
 
-      <input type="hidden" id="current_user" value=<%= params[:id] %>>
+  <input type="hidden" id="current_user" value=<%= params[:id] %>>
   <input type="hidden" id="friend" value=<%= params[:friend_id] %>>
   <input type="hidden" id="user_status" value=<%= current_user.status %>>
 
 
   <div>
-    <div id="messages",style="overflow-y: scroll;">
+    <div id="messages" ,style="overflow-y: scroll;">
 
 
-      <%@Chats.zip(@Chats2).each do |chat1,chat2|%>
+      <% @Chats.zip(@Chats2).each do |chat1, chat2| %>
 
         <% if current_user.sent? %>
-       <% if chat1.present? %>
-         <%if chat1.attachment.present? %>
-          <% if ['jpg', 'jpeg', 'png'].include?(chat1.attachment.file.extension.downcase) %>
-
-        <p class="sent"><%=chat1.message %></p>
-
-
-        <img class="sent" src="<%=chat1.attachment %>"width="200" height="121">
-          <% else%>
-
-            <p class="sent"><%=chat1.message %></p>
-
-            <a href="<%= chat1.attachment_url%>"><%= File.basename(chat1.attachment_url)%></a>
-
-    <%end %>
-        <%else %>
-          <p class="sent"><%=chat1.message %></p>
-
-<%end %>
-        <%end %>
-        <% if chat2.present? %>
-        <% if chat2.attachment.present? %>
-
-          <% if ['jpg', 'jpeg', 'png'].include?(chat2.attachment.file.extension.downcase) %>
-
-            <p class="received"><%=chat2.message %></p>
-
-
-            <img class="received" src="<%=chat2.attachment %>"width="200" height="121">
-          <% else%>
-
-            <p class="received"><%=chat2.message %></p>
-
-            <a href="<%= chat2.attachment_url%>"><%= File.basename(chat2.attachment_url)%></a>
-
-          <%end %>
-        <%else %>
-          <p class="received"><%=chat2.message %></p>
-
-<%end %>
-        <%end %>
-
-
-       <%else %>
           <% if chat1.present? %>
-            <%if chat1.attachment.present? %>
+            <% if chat1.attachment.present? %>
               <% if ['jpg', 'jpeg', 'png'].include?(chat1.attachment.file.extension.downcase) %>
+                <% if chat1.message == "" %>
+                  <img class="send" src="<%= chat1.attachment %>" width="200" height="121" onclick="window.open('<%= chat1.attachment_url%>', '_blank');">
 
-                <p class="received"><%=chat1.message %></p>
+                <% else %>
 
 
-                <img class="received" src="<%=chat1.attachment %>"width="200" height="121">
-              <% else%>
+                  <p class="sent"><%= chat1.message %></p>
 
-                <p class="received"><%=chat1.message %></p>
 
-                <a href="<%= chat1.attachment_url%>"><%= File.basename(chat1.attachment_url)%></a>
+                  <img class="send" src="<%= chat1.attachment %>" width="200" height="121" onclick="window.open('<%= chat1.attachment_url%>', '_blank');">
+                <% end %>
+              <% else %>
+                <% if chat1.message == "" %>
+                  <a class="senda" href="<%= chat1.attachment_url %>"><%= File.basename(chat1.attachment_url) %></a>
 
-              <%end %>
-            <%else %>
-              <p class="received"><%=chat1.message %></p>
+                <% else %>
+                  <p class="sent"><%= chat1.message %></p>
 
-            <%end %>
-          <%end %>
+                  <a class="senda" href="<%= chat1.attachment_url %>"><%= File.basename(chat1.attachment_url) %></a>
+                <% end %>
+              <% end %>
+            <% else %>
+              <p class="sent"><%= chat1.message %></p>
+
+            <% end %>
+          <% end %>
           <% if chat2.present? %>
             <% if chat2.attachment.present? %>
 
               <% if ['jpg', 'jpeg', 'png'].include?(chat2.attachment.file.extension.downcase) %>
+                <% if chat2.message == "" %>
+                  <img class="receive" src="<%= chat2.attachment %>" width="200" height="121" onclick="window.open('<%= chat2.attachment_url%>', '_blank');">
 
-                <p class="sent"><%=chat2.message %></p>
-
-
-                <img class="sent" src="<%=chat2.attachment %>"width="200" height="121">
-              <% else%>
-
-                <p class="sent"><%=chat2.message %></p>
-
-                <a href="<%= chat2.attachment_url%>"><%= File.basename(chat2.attachment_url)%></a>
-
-              <%end %>
-            <%else %>
-              <p class="sent"><%=chat2.message %></p>
-
-            <%end %>
-          <%end %>
+                <% else %>
+                  <p class="received"><%= chat2.message %></p>
 
 
+                  <img class="receive" src="<%= chat2.attachment %>" width="200" height="121" onclick="window.open('<%= chat2.attachment_url%>', '_blank');">
+                <% end %>
+              <% else %>
+
+                <% if chat2.message == "" %>
+                  <a class="receivea" href="<%= chat2.attachment_url %>"><%= File.basename(chat2.attachment_url) %></a>
+
+                <% else %>
 
 
-    <% end %>
-    <% end %>
+                  <p class="received"><%= chat2.message %></p>
+
+                  <a class="receivea" href="<%= chat2.attachment_url %>"><%= File.basename(chat2.attachment_url) %></a>
+                <% end %>
+              <% end %>
+            <% else %>
+              <p class="received"><%= chat2.message %></p>
+
+            <% end %>
+          <% end %>
+
+
+        <% else %>
+          <% if chat1.present? %>
+            <% if chat1.attachment.present? %>
+              <% if ['jpg', 'jpeg', 'png'].include?(chat1.attachment.file.extension.downcase) %>
+                <% if chat1.message == "" %>
+                  <img class="receive" src="<%= chat1.attachment %>" width="200" height="121" onclick="window.open('<%= chat1.attachment_url%>', '_blank');">
+
+                <% else %>
+                  <p class="received"><%= chat1.message %></p>
+
+                  <img class="receive" src="<%= chat1.attachment %>" width="200" height="121" onclick="window.open('<%= chat1.attachment_url%>', '_blank');">
+                <% end %>
+              <% else %>
+
+                <% if chat1.message == "" %>
+                  <a class="receivea" href="<%= chat1.attachment_url %>"><%= File.basename(chat1.attachment_url) %></a>
+
+                <% else %>
+                  <p class="received"><%= chat1.message %></p>
+
+                  <a class="receivea" href="<%= chat1.attachment_url %>"><%= File.basename(chat1.attachment_url) %></a>
+                <% end %>
+              <% end %>
+            <% else %>
+              <p class="received"><%= chat1.message %></p>
+
+            <% end %>
+          <% end %>
+          <% if chat2.present? %>
+            <% if chat2.attachment.present? %>
+
+              <% if ['jpg', 'jpeg', 'png'].include?(chat2.attachment.file.extension.downcase) %>
+                <% if chat2.message == "" %>
+                  <img class="send" src="<%= chat2.attachment %>" width="200" height="121" onclick="window.open('<%= chat2.attachment_url%>', '_blank');">
+
+                <% else %>
+
+                  <p class="sent"><%= chat2.message %></p>
+
+
+                  <img class="send" src="<%= chat2.attachment %>" width="200" height="121" onclick="window.open('<%= chat2.attachment_url%>', '_blank');">
+                <% end %>
+              <% else %>
+
+                <% if chat2.message == "" %>
+                  <a class="senda" href="<%= chat2.attachment_url %>"><%= File.basename(chat2.attachment_url) %></a>
+
+                <% else %>
+                  <p class="sent"><%= chat2.message %></p>
+
+                  <a class="senda" href="<%= chat2.attachment_url %>"><%= File.basename(chat2.attachment_url) %></a>
+                <% end %>
+              <% end %>
+            <% else %>
+              <p class="sent"><%= chat2.message %></p>
+
+            <% end %>
+          <% end %>
+
+
+        <% end %>
+      <% end %>
 
 
     </div>
-
-
-
 
 
     <form id="send_message">

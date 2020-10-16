@@ -51,6 +51,44 @@
           align-self: flex-end;
         }
       }
+      a{
+        display: inline-block;
+        padding: 10px;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        margin-bottom: 5px;
+        margin-top: 5px;
+        max-width: 70%;
+        width: max-content;
+        &.receivea {
+          background-color: chocolate;
+          border-bottom-right-radius: 10px;
+        }
+
+        &.senda {
+          border-bottom-left-radius: 10px;
+          background-color: darkred;
+          align-self: flex-end;
+        }
+
+      }
+
+      img {
+        border-radius: 8px;
+
+        &.receive {
+          background-color: chocolate;
+          border-bottom-right-radius: 10px;
+        }
+
+        &.send {
+          border-bottom-left-radius: 10px;
+          background-color: darkred;
+          align-self: flex-end;
+        }
+      }
+
+
     }
 
     form#send_message {
